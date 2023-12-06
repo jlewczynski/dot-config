@@ -1,21 +1,12 @@
 font:
   normal:
-    family: FiraCode NFM
-    style: Retina
-
+    family: Fira Code Nerd Font
+    style: Regular
   bold:
-    family: FiraCode NFM
+    family: Fira Code Nerd Font
     style: Bold
-
-  italic:
-    family: FiraCode NFM
-    style: Italic
-
-  bold_italic:
-    family: FiraCode NFM
-    style: Bold Italic
-
-  size: 11
+  size: 10
+  builtin_box_drawing: true
 
 # Colors (Base16 Default Dark)
 colors:
@@ -51,15 +42,18 @@ colors:
     cyan:    '0x86c1b9'
     white:   '0xf8f8f8'
 
+draw_bold_text_with_bright_colors: true
+
 window:
-  decorations: buttonless
   padding:
     x: 4
     y: 4
   opacity: 0.95
 
+scrolling:
+  history: 10000
+  multiplier: 3
+
 key_bindings:
-  - { key: Return, mods: Alt|Shift, action: CreateNewWindow }
-  - { key: Tab, mods: Alt, action: ToggleViMode }
-  - { key: "K", mods: Command, chars: "\x1b[A" }
-  - { key: "J", mods: Command, chars: "\x1b[B" }
+  - { key: Return, mods: Super|Shift, action: CreateNewWindow }
+  - { key: Tab, mods: Super, action: ToggleViMode }
