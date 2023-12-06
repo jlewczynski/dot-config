@@ -1,0 +1,38 @@
+# Use pactl to adjust volume in PulseAudio.
+# set $refresh_i3status killall -SIGUSR1 i3status
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# start a terminal
+bindsym $mod+Return exec --no-startup-id alacritty
+
+# app menu
+bindsym $mod+d exec --no-startup-id "rofi -modi drun,run -show drun"
+# lock screen
+bindsym $mod+grave exec --no-startup-id betterlockscreen -l dim
+
+# Screenshots
+set $to_file maim -s "$HOME/images/screenshots/$(date '+%Y-%m-%d-%H%M%S').png"
+set $to_clip maim -s | xclip -selection clipboard -t image/png -i
+set $get_sleep sleep "$(rofi-read 'Sleep time' '3s')"
+
+set $screenshot "Screenshot [z] to file or [x] to clipboard (Shift for delay)"
+mode $screenshot {
+  bindsym z exec $to_file ; mode "default"
+  bindsym x exec $to_clip ; mode "default"
+  bindsym Shift+z exec $get_sleep && $to_file ; mode "default"
+  bindsym Shift+x exec $get_sleep && $to_clip ; mode "default"
+
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+t mode $screenshot
+
+for_window [class="zoom" title="^$"] floating enable ; move window to workspace 10
+for_window [class="zoom" title="Zoom Meeting"] move window to workspace 10
+for_window [class="zoom" title="Zoom"] move window to workspace 19
+for_window [class="brave-browser" title="^DevTools.*"] move window to workspace 4
+for_window [class="code-oss" window_role="browser-window"] move window to workspace 3
+
